@@ -1,0 +1,15 @@
+Flask==2.0.2
+python-dotenv==0.19.1
+requests==2.26.0
+pytorch3d==0.0.1
+torch==1.9.1
+torchaudio==0.9.1
+torchvision==0.10.1
+Pillow==8.3.2
+scikit-image==0.18.3
+tqdm==4.62.3
+opencv-python==4.5.3.56
+trimesh==3.9.32
+ffmpeg==1.4
+PyOpenGL==3.1.5
+PyOpenGL-accelerate==3.1.5

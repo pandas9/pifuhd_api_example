@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        <script>
+            const uploadFile = () => {
+                const formData = new FormData();
+                let file = document.getElementById('image').files[0];
+                formData.append('file', file);
+
+                document.getElementById('objPath').innerHTML = 'Please wait, generating obj';
+
+                fetch(`http://127.0.0.1:5000/upload`, {
+                    method: 'POST',
+                    body: formData
+                }).then(res => res.json()).then(res => {
+                    document.getElementById('objPath').innerHTML = 'Obj path: ' + res.path;
+                }).catch(err => console.log(err));
+            };
+        </script>
+        <p id="objPath"></p>
+        <input accept="image/*" type="file" id="image" onchange="uploadFile()" />
+    </body>
+</html>
