@@ -115,14 +115,14 @@ def gen_rect(image_path):
     """
     Generate Rect for image
     """
-    
-    cuda = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+
+    cuda = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
     net = PoseEstimationWithMobileNet()
     checkpoint = torch.load(f'{dir_path}/checkpoints/rect.pth', map_location=cuda)
     load_state(net, checkpoint)
 
-    if cuda == 'cpu':
-        eval_rect(net.cpu(), [image_path], 512, True)
-    else:
+    if torch.cuda.is_available():
         eval_rect(net.cuda(), [image_path], 512)
+    else:
+        eval_rect(net.cpu(), [image_path], 512, True)
