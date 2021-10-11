@@ -46,7 +46,7 @@ def gen_obj(image_name):
 
     return path
 
-def eval_rect(net, images, height_size):
+def eval_rect(net, images, height_size, cpu=False):
     """
     Evaluate rect of image and output inside txt file
     """
@@ -63,7 +63,7 @@ def eval_rect(net, images, height_size):
         img = cv2.imread(image, cv2.IMREAD_COLOR)
         orig_img = img.copy()
         orig_img = img.copy()
-        heatmaps, pafs, scale, pad = infer_fast(net, img, height_size, stride, upsample_ratio, cpu=False)
+        heatmaps, pafs, scale, pad = infer_fast(net, img, height_size, stride, upsample_ratio, cpu=cpu)
 
         total_keypoints_num = 0
         all_keypoints_by_type = []
@@ -115,9 +115,14 @@ def gen_rect(image_path):
     """
     Generate Rect for image
     """
+    
+    cuda = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 
     net = PoseEstimationWithMobileNet()
-    checkpoint = torch.load(f'{dir_path}/checkpoints/rect.pth')
+    checkpoint = torch.load(f'{dir_path}/checkpoints/rect.pth', map_location=cuda)
     load_state(net, checkpoint)
 
-    eval_rect(net.cuda(), [image_path], 512)
+    if cuda == 'cpu':
+        eval_rect(net.cpu(), [image_path], 512, True)
+    else:
+        eval_rect(net.cuda(), [image_path], 512)

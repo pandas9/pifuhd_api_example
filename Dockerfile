@@ -6,7 +6,7 @@ COPY . /app
 
 RUN apt-get update -y
 
-RUN apt-get install ffmpeg libsm6 libxext6 libgl1 -y
+RUN apt-get install libsm6 libxext6 libgl1 -y
 
 RUN mkdir ./application/checkpoints
 
@@ -20,7 +20,7 @@ RUN mv ./pifuhd.pt ./application/checkpoints/pifuhd.pt
 
 RUN mv ./checkpoint_iter_370000.pth ./application/checkpoints/rect.pth
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 ENTRYPOINT ["python3"]
 
