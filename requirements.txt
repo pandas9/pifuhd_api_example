@@ -13,3 +13,5 @@ trimesh==3.9.32
 ffmpeg==1.4
 PyOpenGL==3.1.5
 PyOpenGL-accelerate==3.1.5
+pycocotools==2.0.2
+numpy>=1.14.0

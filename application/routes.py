@@ -22,5 +22,5 @@ def upload_image():
 
         return { 'path': obj_path }, 200
     except Exception as e:
-        #raise e
-        return { 'message': f'Something went wrong {e}' }, 500
+        raise e
+        #return { 'message': f'Something went wrong {e}' }, 500

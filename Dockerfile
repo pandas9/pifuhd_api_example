@@ -4,11 +4,13 @@ WORKDIR /app
 
 COPY . /app
 
+RUN apt-get update -y
+
+RUN apt-get install ffmpeg libsm6 libxext6 libgl1 -y
+
 RUN mkdir ./application/checkpoints
 
 RUN mkdir ./application/static
-
-RUN pip install --no-cache-dir -r requirements.txt
 
 RUN curl -LO "https://dl.fbaipublicfiles.com/pifuhd/checkpoints/pifuhd.pt"
 
@@ -18,6 +20,8 @@ RUN mv ./pifuhd.pt ./application/checkpoints/pifuhd.pt
 
 RUN mv ./checkpoint_iter_370000.pth ./application/checkpoints/rect.pth
 
-ENTRYPOINT ["python"]
+RUN pip install --no-cache-dir -r requirements.txt
+
+ENTRYPOINT ["python3"]
 
 CMD ["wsgi.py"]
