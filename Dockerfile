@@ -10,7 +10,7 @@ RUN mkdir ./application/static
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN curl -LO "http://dl.fbaipublicfiles.com/pifuhd/checkpoints/pifuhd.pt"
+RUN curl -LO "https://dl.fbaipublicfiles.com/pifuhd/checkpoints/pifuhd.pt"
 
 RUN curl -LO "http://download.01.org/opencv/openvino_training_extensions/models/human_pose_estimation/checkpoint_iter_370000.pth"
 
