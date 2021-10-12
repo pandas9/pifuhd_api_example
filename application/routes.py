@@ -4,6 +4,8 @@ from flask import current_app as app
 from .utils import gen_rect
 from .utils import gen_obj
 
+import os
+
 JSON_MIME_TYPE = 'application/json'
 
 @app.route('/')
@@ -18,7 +20,7 @@ def upload_image():
         image.save(image_path)
 
         gen_rect(image_path)
-        obj_path = gen_obj(image.filename[:4])
+        obj_path = gen_obj(os.path.splitext(os.path.basename(image_path))[0])
 
         return { 'path': obj_path }, 200
     except Exception as e:
