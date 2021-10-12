@@ -2,6 +2,7 @@
 inside terminal execute <br />
 docker build -t pifuhd-flask . <br />
 docker run -d -p 8080:8080 pifuhd-flask <br />
+for cuda11 docker run -d -p 8080:8080 --gpus all nvidia/cuda:11.0-base nvidia-smi pifuhd-flask <br />
 
 # Navigating files and folders
 lib folder is the good stuff <br />
